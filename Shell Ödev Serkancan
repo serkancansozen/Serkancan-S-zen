@@ -1,0 +1,75 @@
+1-a)	“echo” kullanarak ekrana asagidaki sayiyi yazdirin:
+-$ echo 111213212223313233
+1-b) Ciktidaki “1” karakterlerini “5” ile degistirmeyi deneyin:
+-$ echo 111213212223313233 | sed 's/1/5/g'
+1-c)Yine sed kullanarak ”2” karakterlerini “\n” (yeni satir) ile degistirin.
+
+1-d)Listelenen sayilar arasinda “3” gecenleri grep ile filtreleyin.
+-$ echo 111213212223313233 | sed 's/2/\n/g' | grep 3
+
+1-e)Ayri bir alistirma olarak “3” gecmeyenleri “grep -v” ile filtreleyin.
+-$ echo 111213212223313233 | sed 's/2/\n/g' | grep -v 3
+
+
+2-a) Bir for dongusu ile 0’dan 9’a kadar olan rakamlari ekrana yazdirin:
+- for i in {0..9}
+do
+	echo $i
+done
+
+2-b) Icice iki for dongusu kullanarak ondalik sayi sistemindeki iki basamakli tum sayilari listeleyin.
+- for i in {1..9}
+> do
+> for x in {0..9}
+> do
+> echo $i$x
+> done
+> done
+
+
+3-a)	Bugunun tarihini ekrana yazdirin:
+- $ date
+3-b)  Ciktiyi YYYY-MM-DD seklinde duzenleyin:
+- $ date +"%Y-%m-%d"
+3-c) Ayni duzende dunun tarihini gosterin:
+- $ date +"%Y-%m-%d" --date="yesterday"
+3-d) Uc gun oncesini gosterin:
+- $ date +"%Y-%m-%d" --date="3 days ago"
+3-e) Onumuzdeki Cuma gununun tarihini gosterin:
+- $ date +"%Y-%m-%d" --date="next friday"
+3-f)  Bir “for” dongusu ile gectigimiz 7 gunu YYYY-MM-DD duzeninde ekrana yazdiran bir Shell script yazin:
+- for i in {1..7}; do date +"%Y-%m-%d" --date="$i day ago"; done
+
+4-a)	Bir dizine “touch” ile iki dosya ve “mkdir” ile iki dizin olusturun. “ls” ciktisindakileri “for” dongusuyle cevirerek ekrana yazdirin.
+Ardindan “if” kullanarak dosya mi dizin mi olduklarini gosteren bir script yazin:
+-mkdir q4
+cd q4
+touch dosya1 dosya2
+mkdir dizin1/ dizin2/
+ls
+for i in $(find -type d) 
+ do 
+	 echo $i "is director" 
+done
+4-b) Ayni islemi “find” komutuyla yapmayi deneyin. “-type f” dosya, “-type d” dizinleri bulur:
+-for i in $(find -type f)
+ do
+	 echo $i "is file"
+done
+
+5)  Iki sayiyi toplayan hesap makinesi script’i yazin. Ornegin “read a” ile “a” degiskenini klavyeden girdirebilirsiniz.
+Toplama islemini “bc” kullanarak veya Shell fonksiyonlarini kullanarak yapabilirsiniz, ornegin “$(( $a + $b ))”.
+-echo " birinci sayiyi giriniz"
+read birincisayi
+echo "ikinci sayiyi giriniz"
+read ikincisayi
+echo "sonuc:"
+sum=$(expr $birincisayi + $ikincisayi)
+echo $sum
+
+
+6)	“homes.csv” dosyasindaki “Taxes” sutununu “awk” ile ekrana yazdirip 3000 degerinin altinda veya ustunde oldugunu yazan Shell script yaziniz.
+- grep -v Taxes homes.csv | awk '{if ($9>3000) print""$9" is greater than 3000"; else print""$9" is less than 3000";}'
+
+7)	“airtravel.csv” dosyasinda 1958 yilindaki toplam ucus sayisini hesaplayan Shell script yaziniz.
+-grep -v Month airtravel.csv | awk '{sum+=$2} END {print sum}'
