@@ -1,2 +1,2 @@
-# Serkancan-S-zen
+# Serkancan-Sozen-Shell Odevi
 Shell Ödev
